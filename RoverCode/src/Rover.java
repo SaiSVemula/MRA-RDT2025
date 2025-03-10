@@ -90,7 +90,7 @@ public class Rover{
         }
 
         //check if out of bounds
-        if(tempx < 0 || tempy < 0 || tempx > LandingPosition.x || tempy > LandingPosition.y) {
+        if(tempx < 0 || tempy < 0 || tempx > RoverMovement.plateau.length || tempy > RoverMovement.plateau[0].length) {
             return false;
         }
 
