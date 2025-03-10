@@ -32,12 +32,19 @@ public class RoverMovement{
         SetupPlateau(input[0]);
         initialiseRovers(input);
 
+        System.out.println(plateau.length);
+        System.out.println(plateau[0].length);
+
+        for (int i = 0; i < RoverCollection.length; i++) {
+            System.out.println(RoverCollection[i].toString());
+        }
+
         //run the simulation
 //        RunRover();
     }
 
     //intialise the plateau grid
-    private static void SetupPlateau(String UpperRightPosition){
+    private void SetupPlateau(String UpperRightPosition){
         String[] line = UpperRightPosition.split(" ", -1);
 
         int w = Integer.parseInt(line[0]);
@@ -49,10 +56,10 @@ public class RoverMovement{
     }
 
     //unpack the rest of the input, initialise the rovers and save them in an array
-    private static void initialiseRovers(String[] input){
+    private void initialiseRovers(String[] input){
         //setup the rovers array
-        int TotalRovers = input.length - 1 / 2;
-        System.out.println(TotalRovers);
+        int TotalRovers = (input.length - 1) / 2;
+        System.out.println("Total Rovers: " + TotalRovers);
         Rover[] RoversTemp = new Rover[TotalRovers];
         int count = 0;
 
@@ -76,6 +83,7 @@ public class RoverMovement{
             i++;
         }
 
+        RoverCollection = RoversTemp;
     }
 
     //function to run the rover -> output the final location and return
