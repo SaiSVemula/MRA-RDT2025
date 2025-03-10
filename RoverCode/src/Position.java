@@ -8,4 +8,9 @@ public class Position{
         this.y = y;
         this.direction = direction;
     }
+
+    @Override
+    public String toString(){
+        return x + " "+ y + " " + direction;
+    }
 }

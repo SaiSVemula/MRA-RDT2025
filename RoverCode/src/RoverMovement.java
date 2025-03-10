@@ -39,8 +39,8 @@ public class RoverMovement{
             System.out.println(RoverCollection[i].toString());
         }
 
-        //run the simulation
-//        RunRover();
+        //run the rovers
+        RunRover();
     }
 
     //intialise the plateau grid
@@ -87,9 +87,10 @@ public class RoverMovement{
     }
 
     //function to run the rover -> output the final location and return
-//    private static String RunRover(String input, int x, int y) {
-//        for(Rover rover : RoverCollection){
-//
-//        }
-//    }
+    private void RunRover() {
+        for(Rover rover : RoverCollection){
+            String output = rover.executeCommands();
+            System.out.println(output);
+        }
+    }
 }
