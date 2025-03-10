@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 //Plateau is split into 4 parts like so:
 //0 1
 //2 3
@@ -14,14 +13,27 @@ public class RoverMovement{
     private int[][] plateau; // 0: not visited; 1: visited
     private Rover[] RoverCollection;
 
+    //store the inputs then run them one by one
+    public static void main(String[] args) {
+        String[] input1 = { //given test input
+                "5 5",
+                "1 2 N",
+                "LMLMLMLMM",
+                "3 3 E",
+                "MMRMMRMRRM"
+        };
+        new RoverMovement(input1);
+        System.out.println("Rover Movement");
+    }
+
     // program to run the rovers sequentially
-    public void RoverMovement(String[] input) {
+    public RoverMovement(String[] input) {
         //setup plateau and rovers
         SetupPlateau(input[0]);
         initialiseRovers(input);
 
         //run the simulation
-        RunRover();
+//        RunRover();
     }
 
     //intialise the plateau grid
@@ -37,12 +49,12 @@ public class RoverMovement{
     }
 
     //unpack the rest of the input, initialise the rovers and save them in an array
-    private static void initialiseRovers(String line1, String line2){
+    private static void initialiseRovers(String[] input){
         //setup the rovers array
-        TotalRovers = input.length - 1 / 2;
+        int TotalRovers = input.length - 1 / 2;
         System.out.println(TotalRovers);
         Rover[] RoversTemp = new Rover[TotalRovers];
-        int count = 0
+        int count = 0;
 
         for(int i = 1; i < input.length; i++){
             //Landing Position
@@ -51,12 +63,12 @@ public class RoverMovement{
             int y = Integer.parseInt(LandingPosition[1]);
             char direction = LandingPosition[2].charAt(0);
 
-            Position LandingPostion = new Position(x, y, direction);
+            Position RoverPosition = new Position(x, y, direction);
 
             //rover commands
             String MovementCommands = input[i+1];
-            char[] roverCommands = MovementCommands.toCharArray();
-            Rover rover = new Rover(LandingPosition, roverCommands);
+            char[] RoverCommands = MovementCommands.toCharArray();
+            Rover rover = new Rover(RoverPosition, RoverCommands);
             RoversTemp[count] = rover;
 
             //increment variables
@@ -67,19 +79,9 @@ public class RoverMovement{
     }
 
     //function to run the rover -> output the final location and return
-    private static String RunRover(String input, int x, int y) {
-        for(Rover rover : RoverCollection){
-
-        }
-    }
-
-    public static void main(String[] args) {
-        String[] input = {
-                "5 5",
-                "1 2 N",
-                "LMLMLMLMM",
-                "3 3 E",
-                "MMRMMRMRRM"
-        };
-    }
+//    private static String RunRover(String input, int x, int y) {
+//        for(Rover rover : RoverCollection){
+//
+//        }
+//    }
 }
