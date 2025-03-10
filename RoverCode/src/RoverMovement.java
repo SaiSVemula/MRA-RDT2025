@@ -25,11 +25,13 @@ public class RoverMovement{
                 char[] RoverCommands = getValidMovementCommands();
                 Rover rover = new Rover(roverLandingPosition, RoverCommands);
                 String value = rover.executeCommands();
-                if(value != null){
-                    System.out.println(value);
-                    RoverCollection.add(rover);
-                    valid = true;
+                if(value == null){
+                    System.out.println("Invalid Movement commands Rover is either falling off the plateau or colliding with another rover, please try again!")
+                    continue;
                 }
+                System.out.println(value);
+                RoverCollection.add(rover);
+                valid = true;
             }
         }
     }
@@ -92,12 +94,12 @@ public class RoverMovement{
                     continue;
                 }
                 //if the x y are out of bounds
-                if (x < 0 || y < 0 || x >= plateau.length || y >= plateau[0].length) {
+                if (x < 0 || y < 0 || y >= plateau.length || x >= plateau[0].length) {
                     System.out.println(invalid);
                     continue;
                 }
                 //if the position is currently occupied by another rover
-                if (plateau[x][y] == 1) {
+                if (plateau[y][x] == 1) {
                     System.out.println(invalid);
                     continue;
                 }
