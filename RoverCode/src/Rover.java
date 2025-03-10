@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Rover{
     Position LandingPosition;
     char[] MovementCommands;
@@ -29,9 +27,16 @@ public class Rover{
                 rotateRover(command);
             }
             else{//assuming M
-                moveRover();
+                boolean value = moveRover();
+                if(!value){
+                    return null;
+                }
             }
         }
+
+        int x = CurrentPosition.x;
+        int y = CurrentPosition.y;
+        RoverMovement.plateau[x][y] = 1;
 
         return CurrentPosition.toString();
     }
@@ -67,18 +72,37 @@ public class Rover{
     }
 
     //move the rover forward which ever direction it is facing in.
-    private void moveRover(){
+    private boolean moveRover(){
+        int tempx = CurrentPosition.x;
+        int tempy = CurrentPosition.y;
+
         if(CurrentPosition.direction == 'N'){
-            CurrentPosition.y += 1;
+            tempy += 1;
         }
         else if(CurrentPosition.direction == 'E'){
-            CurrentPosition.x += 1;
+            tempx += 1;
         }
         else if(CurrentPosition.direction == 'S'){
-            CurrentPosition.y -= 1;
+            tempy -= 1;
         }
         else if(CurrentPosition.direction == 'W'){
-            CurrentPosition.x -= 1;
+            tempx -= 1;
         }
+
+        //check if out of bounds
+        if(tempx < 0 || tempy < 0 || tempx > LandingPosition.x || tempy > LandingPosition.y) {
+            return false;
+        }
+
+        //check if the rover is colliding into another rover
+        if(RoverMovement.plateau[tempx][tempy] == 1){
+            return false;
+        }
+
+        //if the move is valid now update the position of the rover.
+        CurrentPosition.x = tempx;
+        CurrentPosition.y = tempy;
+
+        return true;
     }
 }
