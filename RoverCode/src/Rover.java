@@ -36,7 +36,7 @@ public class Rover{
 
         int x = CurrentPosition.x;
         int y = CurrentPosition.y;
-        RoverMovement.plateau[x][y] = 1;
+        RoverMovement.plateau[y][x] = 1;
 
         return CurrentPosition.toString();
     }
@@ -90,12 +90,12 @@ public class Rover{
         }
 
         //check if out of bounds
-        if(tempx < 0 || tempy < 0 || tempx > RoverMovement.plateau.length || tempy > RoverMovement.plateau[0].length) {
+        if(tempx < 0 || tempy < 0 || tempy >= RoverMovement.plateau.length || tempx >= RoverMovement.plateau[0].length) {
             return false;
         }
 
         //check if the rover is colliding into another rover
-        if(RoverMovement.plateau[tempx][tempy] == 1){
+        if(RoverMovement.plateau[tempy][tempx] == 1){
             return false;
         }
 
